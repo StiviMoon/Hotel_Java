@@ -16,7 +16,7 @@ public class Room extends JFrame implements ActionListener{
     JTable table;
     JButton back;
     
-    Room(){
+    public Room(){
         
         
         getContentPane().setBackground(Color.WHITE);

@@ -1,7 +1,6 @@
 package hotel.management.system.vista.Admin;
 
-import hotel.management.system.Principal.Login; // Asegúrate de importar la clase de Login
-import hotel.management.system.vista.Reception.Reception;
+import hotel.management.system.Principal.Login; // Asegúrate de importar la clase de Login// Asegúrate de importar la clase DeleteRoom
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +10,7 @@ public class Dashboard extends JFrame implements ActionListener {
     private CardLayout cardLayout;
     private JPanel cardPanel;
     private AddRooms addRoomsPanel;
-    private Reception receptionPanel;
+    private hotel.management.system.vista.Admin.DeleteRoom deleteRoomsPanel; // Declaración del panel de eliminar habitaciones
     private JButton logout;
     private JLabel headerLabel; // JLabel para el encabezado
 
@@ -38,13 +37,13 @@ public class Dashboard extends JFrame implements ActionListener {
         // Añadir el encabezado al panel lateral
         sidePanel.add(headerLabel); // Añadir el encabezado en la primera posición
 
-        JButton btnReception = new JButton("Recepción");
-        styleButton(btnReception);
-        btnReception.addActionListener(this);
-
         JButton btnAddRoom = new JButton("Agregar Habitación");
         styleButton(btnAddRoom);
         btnAddRoom.addActionListener(this);
+
+        JButton btnDelete = new JButton("Eliminar Habitación");
+        styleButton(btnDelete);
+        btnDelete.addActionListener(this);
 
         // Botón de Cerrar Sesión
         logout = new JButton("Cerrar Sesión");
@@ -52,8 +51,8 @@ public class Dashboard extends JFrame implements ActionListener {
         logout.addActionListener(this); // Añadir listener para cerrar sesión
 
         sidePanel.add(new JLabel()); // Espacio superior
-        sidePanel.add(btnReception);
         sidePanel.add(btnAddRoom);
+        sidePanel.add(btnDelete);
         sidePanel.add(logout); // Añadir el botón al panel lateral
 
         add(sidePanel, BorderLayout.WEST);
@@ -63,13 +62,13 @@ public class Dashboard extends JFrame implements ActionListener {
         cardLayout = new CardLayout();
         cardPanel.setLayout(cardLayout);
 
-        // Panel para Recepción
-        receptionPanel = new Reception();
-        cardPanel.add(receptionPanel, "Reception");
-
         // Integrar AddRooms como panel
         addRoomsPanel = new AddRooms();
         cardPanel.add(addRoomsPanel, "AddRoom");
+
+        // Integrar DeleteRoom como panel
+        deleteRoomsPanel = new DeleteRoom();
+        cardPanel.add(deleteRoomsPanel, "DeleteRoom");
 
         add(cardPanel, BorderLayout.CENTER);
         setVisible(true);
@@ -88,15 +87,15 @@ public class Dashboard extends JFrame implements ActionListener {
         String command = ae.getActionCommand();
 
         switch (command) {
-            case "Recepción":
-                cardLayout.show(cardPanel, "Reception");
-                break;
             case "Agregar Habitación":
                 cardLayout.show(cardPanel, "AddRoom");
                 break;
+            case "Eliminar Habitación":
+                cardLayout.show(cardPanel, "DeleteRoom");
+                break;
             case "Cerrar Sesión":
-                setVisible(false); // Oculta el Dashboard
-                new Login(); // Redirige a la pantalla de login
+                setVisible(false);
+                new Login();
                 break;
             default:
                 break;
