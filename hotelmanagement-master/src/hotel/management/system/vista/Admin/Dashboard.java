@@ -10,7 +10,7 @@ public class Dashboard extends JFrame implements ActionListener {
     private CardLayout cardLayout;
     private JPanel cardPanel;
     private AddRooms addRoomsPanel;
-    private hotel.management.system.vista.Admin.DeleteRoom deleteRoomsPanel; // Declaración del panel de eliminar habitaciones
+    private verHabitaciones deleteRoomsPanel; // Declaración del panel de eliminar habitaciones
     private JButton logout;
     private JLabel headerLabel; // JLabel para el encabezado
 
@@ -41,7 +41,7 @@ public class Dashboard extends JFrame implements ActionListener {
         styleButton(btnAddRoom);
         btnAddRoom.addActionListener(this);
 
-        JButton btnDelete = new JButton("Eliminar Habitación");
+        JButton btnDelete = new JButton("Ver Habitaciónes");
         styleButton(btnDelete);
         btnDelete.addActionListener(this);
 
@@ -67,8 +67,8 @@ public class Dashboard extends JFrame implements ActionListener {
         cardPanel.add(addRoomsPanel, "AddRoom");
 
         // Integrar DeleteRoom como panel
-        deleteRoomsPanel = new DeleteRoom();
-        cardPanel.add(deleteRoomsPanel, "DeleteRoom");
+        deleteRoomsPanel = new verHabitaciones();
+        cardPanel.add(deleteRoomsPanel, "verHabitaciones");
 
         add(cardPanel, BorderLayout.CENTER);
         setVisible(true);
@@ -90,8 +90,8 @@ public class Dashboard extends JFrame implements ActionListener {
             case "Agregar Habitación":
                 cardLayout.show(cardPanel, "AddRoom");
                 break;
-            case "Eliminar Habitación":
-                cardLayout.show(cardPanel, "DeleteRoom");
+            case "Ver Habitaciónes":
+                cardLayout.show(cardPanel, "verHabitaciones");
                 break;
             case "Cerrar Sesión":
                 setVisible(false);

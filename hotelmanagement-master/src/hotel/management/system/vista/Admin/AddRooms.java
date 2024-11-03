@@ -4,6 +4,7 @@ import hotel.management.system.controlador.conexion.Conn;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 public class AddRooms extends JPanel implements ActionListener {
 
@@ -12,89 +13,94 @@ public class AddRooms extends JPanel implements ActionListener {
     JComboBox<String> avaiablecombo, cleancombo, bedcombo;
 
     public AddRooms() {
+        setBackground(new Color(245, 245, 245));
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 10, 5, 10);
 
-        setBackground(Color.WHITE);
-        setLayout(null);
-
+        // Título
         JLabel heading = new JLabel("AGREGAR HABITACION");
-        heading.setFont(new Font("Tahoma", Font.BOLD, 18));
-        heading.setBounds(150, 20, 300, 20);
-        add(heading);
+        heading.setFont(new Font("Arial", Font.BOLD, 16));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2; // Ocupa dos columnas
+        gbc.anchor = GridBagConstraints.CENTER; // Centrar el título
+        add(heading, gbc);
 
-        JLabel lblrooms = new JLabel("NUMERO DE HABITACION");
-        lblrooms.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblrooms.setBounds(60, 80, 320, 30);
-        add(lblrooms);
+        // Número de habitación
+        gbc.gridwidth = 1; // Solo ocupa una columna
+        gbc.gridy++;
+        gbc.anchor = GridBagConstraints.WEST; // Alinear a la izquierda
+        add(new JLabel("NUMERO DE HABITACION:"), gbc);
+        tfroom = new JTextField(10);
+        tfroom.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        gbc.gridx = 1; // Segunda columna
+        add(tfroom, gbc);
 
-        tfroom = new JTextField();
-        tfroom.setBounds(280, 80, 150, 30);
-        add(tfroom);
+        // Habitación disponible
+        gbc.gridx = 0; // Regresar a la primera columna
+        gbc.gridy++;
+        add(new JLabel("HABITACION DISPONIBLE:"), gbc);
+        avaiablecombo = new JComboBox<>(new String[]{"DISPONIBLE", "OCUPADA"});
+        gbc.gridx = 1; // Segunda columna
+        add(avaiablecombo, gbc);
 
-        JLabel lblavaible = new JLabel("HABITACION DISPONIBLE");
-        lblavaible.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblavaible.setBounds(60, 130, 320, 30);
-        add(lblavaible);
+        // Estado de la habitación
+        gbc.gridx = 0;
+        gbc.gridy++;
+        add(new JLabel("ESTADO DE HABITACION:"), gbc);
+        cleancombo = new JComboBox<>(new String[]{"LIMPIA", "SUCIA"});
+        gbc.gridx = 1; // Segunda columna
+        add(cleancombo, gbc);
 
-        String[] availableOptions = {"DISPONIBLE", "OCUPADA"};
-        avaiablecombo = new JComboBox<>(availableOptions);
-        avaiablecombo.setBounds(280, 130, 150, 30);
-        avaiablecombo.setBackground(Color.WHITE);
-        add(avaiablecombo);
+        // Precio de la habitación
+        gbc.gridx = 0;
+        gbc.gridy++;
+        add(new JLabel("PRECIO DE HABITACION:"), gbc);
+        tfprice = new JTextField(10);
+        gbc.gridx = 1; // Segunda columna
+        add(tfprice, gbc);
 
-        JLabel lblclean = new JLabel("ESTADO DE HABITACION");
-        lblclean.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblclean.setBounds(60, 180, 320, 30);
-        add(lblclean);
+        // Tipo de cama
+        gbc.gridx = 0;
+        gbc.gridy++;
+        add(new JLabel("TIPO DE CAMA:"), gbc);
+        bedcombo = new JComboBox<>(new String[]{"CAMA SENCILLA", "CAMA DOBLE"});
+        gbc.gridx = 1; // Segunda columna
+        add(bedcombo, gbc);
 
-        String[] cleanOptions = {"LIMPIA", "SUCIA"};
-        cleancombo = new JComboBox<>(cleanOptions);
-        cleancombo.setBounds(280, 180, 150, 30);
-        cleancombo.setBackground(Color.WHITE);
-        add(cleancombo);
-
-        JLabel lblprice = new JLabel("PRECIO DE HABITACION");
-        lblprice.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblprice.setBounds(60, 230, 320, 30);
-        add(lblprice);
-
-        tfprice = new JTextField();
-        tfprice.setBounds(280, 230, 150, 30);
-        add(tfprice);
-
-        JLabel lbltype = new JLabel("TIPO DE CAMA");
-        lbltype.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lbltype.setBounds(60, 280, 320, 30);
-        add(lbltype);
-
-        String[] bedOptions = {"CAMA SENCILLA", "CAMA DOBLE"};
-        bedcombo = new JComboBox<>(bedOptions);
-        bedcombo.setBounds(280, 280, 150, 30);
-        bedcombo.setBackground(Color.WHITE);
-        add(bedcombo);
-
+        // Botones
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 1; // Asegurarse que ocupen una columna cada uno
         add = new JButton("AGREGAR HABITACION");
         add.setForeground(Color.WHITE);
-        add.setBackground(Color.BLACK);
-        add.setBounds(60, 350, 200, 30);
+        add.setBackground(new Color(0, 120, 215));
         add.addActionListener(this);
-        add(add);
+        gbc.anchor = GridBagConstraints.CENTER; // Centrar el botón
+        add(add, gbc);
 
+        gbc.gridx = 1; // Segunda columna para el botón cancelar
         cancel = new JButton("CANCELAR");
         cancel.setForeground(Color.WHITE);
-        cancel.setBackground(Color.BLACK);
-        cancel.setBounds(280, 350, 150, 30);
+        cancel.setBackground(new Color(0, 120, 215));
         cancel.addActionListener(this);
-        add(cancel);
+        add(cancel, gbc);
 
+        // Imagen
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2; // La imagen ocupará dos columnas
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/twelve.jpg"));
         JLabel image = new JLabel(i1);
-        image.setBounds(400, 30, 500, 300);
-        add(image);
+        image.setPreferredSize(new Dimension(200, 100)); // Ajustar el tamaño de la imagen
+        add(image, gbc);
     }
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == add) {
-            String numerohab = tfroom.getText();
+            String room_number = tfroom.getText(); // Obtener el número de habitación
             String dispo = (String) avaiablecombo.getSelectedItem();
             String estado = (String) cleancombo.getSelectedItem();
             String precio = tfprice.getText();
@@ -102,15 +108,29 @@ public class AddRooms extends JPanel implements ActionListener {
 
             try {
                 Conn conn = new Conn();
-                String str = "insert into room values('" + numerohab + "','" + dispo + "','" + estado + "','" + precio + "','" + tipo + "')";
-                conn.s.executeUpdate(str);
 
-                JOptionPane.showMessageDialog(null, "NUEVA HABITACION AÑADIDA EXITOSAMENTE");
+                // Comprobar si el número de habitación ya existe
+                String checkQuery = "SELECT COUNT(*) FROM room WHERE numerohab='" + room_number + "'";
+                ResultSet rs = conn.s.executeQuery(checkQuery);
+                rs.next();
+                int count = rs.getInt(1);
+
+                if (count > 0) {
+                    JOptionPane.showMessageDialog(null, "EL NÚMERO DE HABITACION YA EXISTE. POR FAVOR INGRESE UN NÚMERO ÚNICO.");
+                } else {
+                    // Insertar nueva habitación
+                    String str = "INSERT INTO room VALUES('" + room_number + "','" + dispo + "','" + estado + "','" + precio + "','" + tipo + "')";
+                    conn.s.executeUpdate(str);
+                    JOptionPane.showMessageDialog(null, "NUEVA HABITACION AÑADIDA EXITOSAMENTE");
+                    tfroom.setText(""); // Limpiar el campo de número de habitación
+                    tfprice.setText(""); // Limpiar el campo de precio
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            // Puedes hacer alguna acción adicional para el botón cancelar si es necesario
+            // Acción para cancelar
+            // Aquí puedes implementar la acción que deseas realizar al cancelar
         }
     }
 }

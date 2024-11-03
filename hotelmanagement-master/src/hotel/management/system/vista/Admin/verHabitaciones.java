@@ -7,13 +7,13 @@ import java.sql.*;
 import hotel.management.system.controlador.conexion.Conn;
 import net.proteanit.sql.DbUtils;
 
-public class DeleteRoom extends JPanel implements ActionListener {
+public class verHabitaciones extends JPanel implements ActionListener {
     private JTable table;
     private JButton deleteButton;
     private JButton updateButton; // Nuevo botón para actualizar
     private JButton backButton;
 
-    public DeleteRoom() {
+    public verHabitaciones() {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
