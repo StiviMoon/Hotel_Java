@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/steve/Downloads/hotelmanagement-master/hotelmanagement-master/src/hotel/management/system/Conn.java</file>
-            <file>file:/C:/Users/steve/Downloads/hotelmanagement-master/hotelmanagement-master/src/hotel/management/system/Reception.java</file>
-            <file>file:/C:/Users/steve/Downloads/hotelmanagement-master/hotelmanagement-master/src/hotel/management/system/AddCustomer.java</file>
-            <file>file:/C:/Users/steve/Downloads/hotelmanagement-master/hotelmanagement-master/src/hotel/management/system/Room.java</file>
-            <file>file:/C:/Users/steve/Downloads/hotelmanagement-master/hotelmanagement-master/src/hotel/management/system/HotelManagementSystem.java</file>
-            <file>file:/C:/Users/steve/Downloads/hotelmanagement-master/hotelmanagement-master/src/hotel/management/system/Login.java</file>
+            <file>file:/C:/Users/dan05/OneDrive/Escritorio/3%20SEMESTR/Programacion%20orientada%20a%20eventos/hotel%20java/Hotel_Java/hotelmanagement-master/src/hotel/management/system/vista/Admin/AddRooms.java</file>
+            <file>file:/C:/Users/dan05/OneDrive/Escritorio/3%20SEMESTR/Programacion%20orientada%20a%20eventos/hotel%20java/Hotel_Java/hotelmanagement-master/src/hotel/management/system/controlador/conexion/Conn.java</file>
+            <file>file:/C:/Users/dan05/OneDrive/Escritorio/3%20SEMESTR/Programacion%20orientada%20a%20eventos/hotel%20java/Hotel_Java/hotelmanagement-master/src/hotel/management/system/vista/Admin/Dashboard.java</file>
         </group>
     </open-files>
 </project-private>
